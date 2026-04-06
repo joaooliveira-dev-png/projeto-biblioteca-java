@@ -11,12 +11,15 @@ Este projeto foi desenvolvido com o objetivo de praticar conceitos fundamentais 
 
 ---
 
-## 🚀 Funcionalidades (Fase 1)
+## 🚀 Funcionalidades 
 
 - Cadastro de livros
 - Cadastro de usuários
 - Estrutura inicial de uma biblioteca
 - Controle básico utilizando listas (ArrayList)
+- Empréstimo de livros
+- Devolução de livros
+- Controle de disponibilidade
 
 ---
 
@@ -36,15 +39,6 @@ src/
 - Java
 - Git
 - GitHub
-
----
-
-## 🚧 Próximas melhorias (Fase 2)
-
-- Sistema de empréstimo de livros
-- Validação de disponibilidade
-- Regras de negócio
-- Tratamento de exceções
 
 ---
 
