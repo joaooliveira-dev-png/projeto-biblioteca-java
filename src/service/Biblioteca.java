@@ -22,9 +22,9 @@ public class Biblioteca {
         System.out.println("Nenhum livro cadastrado.");
         return;
     }
-
-    for (int i = 0; i < livros.size(); i++) {
-        System.out.println("[" + i + "] " + livros.get(i));
+    
+    for(Livro livro : livros){
+        System.out.println(livro);
     }
     }
     
@@ -33,11 +33,11 @@ public class Biblioteca {
         System.out.println("Nenhum usuário cadastrado.");
         return;
     }
-
-    for (int i = 0; i < usuarios.size(); i++) {
-        System.out.println("[" + i + "] " + usuarios.get(i));
+    
+    for(Usuario usuario : usuarios){
+        System.out.println(usuario);
     }
-    }
+   }
     
     public void emprestarLivro(Livro livro, Usuario usuario){
         if(livro == null || usuario == null){
@@ -58,12 +58,6 @@ public class Biblioteca {
            livro.setDisponivel(true);
            System.out.println("Livro devolvido com sucesso");
        }
-    }
-    
-    @Override
-    public String toString() {
-        return "Livros: " + livros.size() +
-               " | Usuários: " + usuarios.size();
     }
     
     public List<Livro> getLivros() {
