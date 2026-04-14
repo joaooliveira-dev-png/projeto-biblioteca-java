@@ -33,11 +33,28 @@ public class Biblioteca {
         System.out.println("Nenhum usuário cadastrado.");
         return;
     }
-    
+     
     for(Usuario usuario : usuarios){
         System.out.println(usuario);
     }
-   }
+    }
+    
+    public Livro buscarLivroPorTitulo(String titulo){
+        for(Livro livro : livros){
+            if(livro.getTitulo().equalsIgnoreCase(titulo)){
+            return livro;
+            }
+        } return null;
+    }
+    
+    public Usuario buscarUsuarioPorEmail(String email){
+        for(Usuario usuario : usuarios){
+            if(usuario.getEmail().equalsIgnoreCase(email)){
+            return usuario;
+            }
+        }
+        return null;
+    }
     
     public void emprestarLivro(Livro livro, Usuario usuario){
         if(livro == null || usuario == null){
