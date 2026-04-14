@@ -19,7 +19,7 @@ public class ProjetoBiblioteca {
         
         while(true){
         
-            System.out.println("[1] Cadastrar livro");
+            System.out.println("\n[1] Cadastrar livro");
             System.out.println("[2] Cadastrar usuário");
             System.out.println("[3] Emprestar livro");
             System.out.println("[4] Devolver livro");
@@ -84,29 +84,27 @@ public class ProjetoBiblioteca {
                     
                     biblioteca.listarLivros();
                     try{
-                        System.out.println("Escolha o livro pelo número: ");
-                        int indiceLivro = entrada.nextInt();
-                        entrada.nextLine();
+                        System.out.println("Escolha o livro pelo titulo: ");
+                        String titulo = entrada.nextLine();
                         
-                        if (indiceLivro < 0 || indiceLivro >= biblioteca.getLivros().size()) {
-                            System.out.println("Índice de livro inválido!");
+                        Livro livro = biblioteca.buscarLivroPorTitulo(titulo);
+                        
+                        if(livro == null){
+                            System.out.println("Livro não encontrado!");
                             break;
                         }
-
-                        Livro livro = biblioteca.getLivros().get(indiceLivro);
                         
                         biblioteca.listarUsuarios();
                         
-                        System.out.println("Escolha o usuário pelo número: ");
-                        int indiceUsuario = entrada.nextInt();
-                        entrada.nextLine();
+                        System.out.println("Escolha o usuário pelo e-mail: ");
+                        String email = entrada.nextLine();
                         
-                        if (indiceUsuario < 0 || indiceUsuario >= biblioteca.getUsuarios().size()) {
-                            System.out.println("Índice de usuário inválido!");
+                        Usuario usuario = biblioteca.buscarUsuarioPorEmail(email);
+                        
+                        if(usuario == null){
+                            System.out.println("Usuário não encontrado!");
                             break;
                         }
-                        
-                        Usuario usuario = biblioteca.getUsuarios().get(indiceUsuario);
                         
                         biblioteca.emprestarLivro(livro, usuario);
                       
@@ -120,18 +118,18 @@ public class ProjetoBiblioteca {
                     
                     biblioteca.listarLivros();
                     try{
-                        System.out.println("Escolha o livro pelo número: ");
-                        int indiceLivro = entrada.nextInt();
-                        entrada.nextLine();
+                        System.out.println("Escolha o livro pelo titulo: ");
+                        String titulo = entrada.nextLine();
                         
-                        if (indiceLivro < 0 || indiceLivro >= biblioteca.getLivros().size()) {
-                            System.out.println("Índice inválido!");
+                        Livro livro = biblioteca.buscarLivroPorTitulo(titulo);
+                        
+                        if(livro == null){
+                            System.out.println("Livro não encontrado!");
                             break;
                         }
                         
-                        Livro livro = biblioteca.getLivros().get(indiceLivro);
-                        
                         biblioteca.devolverLivro(livro);
+                        
                     }catch(Exception erro){
                         System.out.println("Erro: " + erro.getMessage());
                     }
