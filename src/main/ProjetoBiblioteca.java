@@ -1,7 +1,5 @@
 package main;
 
-
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import model.Livro;
@@ -24,6 +22,7 @@ public class ProjetoBiblioteca {
             System.out.println("[3] Emprestar livro");
             System.out.println("[4] Devolver livro");
             System.out.println("[5] Listar livros");
+            System.out.println("[6] Listar usuários");
             System.out.println("[0] Sair");
             System.out.println("\nEscolha uma opção: ");
             escolha = entrada.nextInt();
@@ -139,6 +138,13 @@ public class ProjetoBiblioteca {
                     System.out.println("----- TODOS OS LIVROS -----");
                     
                     biblioteca.listarLivros();
+                    
+                    break;
+                    
+                case 6:
+                    System.out.println("----- TODOS OS USUÁRIOS -----");
+                    
+                    biblioteca.listarUsuarios();
                     
                     break;
                     
