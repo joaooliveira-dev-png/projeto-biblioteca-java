@@ -1,13 +1,16 @@
 package service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import model.Emprestimo;
 import model.Livro;
 import model.Usuario;
 
 public class Biblioteca {
     private List<Livro> livros = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
+    private List<Emprestimo> emprestimos = new ArrayList<>();
     
     public void adicionarLivro(Livro livro) {
     livros.add(livro);
@@ -62,21 +65,35 @@ public class Biblioteca {
         }
         if(!livro.isDisponivel()){
             throw new IllegalStateException("O livro já está emprestado. Aguarde a sua devolução");
-        } else {
-            livro.setDisponivel(false);
-            System.out.println(usuario + " seu emprestimo foi realizado com sucesso");
         }
+        
+        Emprestimo e = new Emprestimo(usuario, livro, LocalDate.now());
+        
+        livro.setDisponivel(false);
+        emprestimos.add(e);
+    
+        System.out.println("Empréstimo realizado com sucesso para o usuário: " + usuario.getNome());
     }
     
     public void devolverLivro(Livro livro){
-       if(livro.isDisponivel()){
-          throw new IllegalStateException("O livro já está disponível");
-       }else{
-           livro.setDisponivel(true);
-           System.out.println("Livro devolvido com sucesso");
-       }
+      if(livro == null){
+          throw new IllegalArgumentException("O livro não pode ser nulo");
+      }
+      
+      for(Emprestimo e : emprestimos){
+          if(e.getLivro().equals(livro) && e.getDataDevolucao() == null){
+              
+              e.devolver(LocalDate.now());
+              livro.setDisponivel(true);
+              
+              System.out.println("Livro devolvido com sucesso!");
+              return;
+          }
+          
+          throw new IllegalStateException("Não existe empréstimo ativo para esse livro");
+      }
     }
-    
+       
     public List<Livro> getLivros() {
     return livros;
     }
