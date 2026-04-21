@@ -4,12 +4,27 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import model.Livro;
 import model.Usuario;
+import persistence.GerenciaArquivo;
 import service.Biblioteca;
 
 public class ProjetoBiblioteca {
 
     public static void main(String[] args) {
+       GerenciaArquivo gerencia = new GerenciaArquivo();
         Biblioteca biblioteca = new Biblioteca();
+
+
+        biblioteca.setUsuarios(gerencia.carregarUsuarios());
+        biblioteca.setLivros(gerencia.carregarLivros());
+        biblioteca.setEmprestimos(
+            gerencia.carregarEmprestimo(
+                biblioteca.getUsuarios(),
+                    biblioteca.getLivros()
+            
+            )
+        );
+     
+
         Scanner entrada = new Scanner(System.in);
         int escolha;
         
@@ -42,7 +57,9 @@ public class ProjetoBiblioteca {
                         LocalDate data = LocalDate.parse(entrada.nextLine());
                         
                         Livro livro = new Livro(titulo, autor, data);
+                        
                         biblioteca.adicionarLivro(livro);
+                        gerencia.salvarLivro(biblioteca.getLivros());
                         
                         System.out.println("Livro adicionado com sucesso!");
                         
@@ -69,7 +86,9 @@ public class ProjetoBiblioteca {
                         String email = entrada.nextLine();
                         
                         Usuario usuario = new Usuario(id, nome, email);
+                        
                         biblioteca.adicionarUsuario(usuario);
+                        gerencia.salvarUsuario(biblioteca.getUsuarios());
                         
                         System.out.println("Usuário cadastrado com sucesso!");
                         
@@ -106,6 +125,9 @@ public class ProjetoBiblioteca {
                         }
                         
                         biblioteca.emprestarLivro(livro, usuario);
+
+                        gerencia.salvarEmprestimo(biblioteca.getEmprestimos());
+                        gerencia.salvarLivro(biblioteca.getLivros());
                       
                     }catch(Exception erro){
                         System.out.println("Erro: " + erro.getMessage());
@@ -128,6 +150,9 @@ public class ProjetoBiblioteca {
                         }
                         
                         biblioteca.devolverLivro(livro);
+
+                        gerencia.salvarEmprestimo(biblioteca.getEmprestimos());
+                        gerencia.salvarLivro(biblioteca.getLivros());
                         
                     }catch(Exception erro){
                         System.out.println("Erro: " + erro.getMessage());
@@ -150,6 +175,9 @@ public class ProjetoBiblioteca {
                     
                 case 0:
                     System.out.println("Programa encerrado! Obrigado por usar nosso sistema!");
+                    gerencia.salvarUsuario(biblioteca.getUsuarios());
+                    gerencia.salvarLivro(biblioteca.getLivros());
+                    gerencia.salvarEmprestimo(biblioteca.getEmprestimos());
                     return;
             }
         }
