@@ -89,9 +89,8 @@ public class Biblioteca {
               System.out.println("Livro devolvido com sucesso!");
               return;
           }
-          
-          throw new IllegalStateException("Não existe empréstimo ativo para esse livro");
       }
+       throw new IllegalStateException("Não existe empréstimo ativo para esse livro");
     }
        
     public List<Livro> getLivros() {
@@ -101,4 +100,22 @@ public class Biblioteca {
     public List<Usuario> getUsuarios() {
     return usuarios;
     }
+
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
+    }
+    
+    
 }
