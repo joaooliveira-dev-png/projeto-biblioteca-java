@@ -19,7 +19,7 @@ public class GerenciaArquivo {
     File fileEmprestimo = new File("emprestimos.txt");
     File fileUsuario = new File("usuarios.txt");
 
-    public void salvarLivros(List<Livro> livros){
+    public void salvarLivro(List<Livro> livros){
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileLivro));
             
